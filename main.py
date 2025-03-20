@@ -34,8 +34,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -76,8 +76,6 @@ def generate_keypair():
     public_key = private_key.public_key
     global pkserver
     global skserver
-    print(pkserver)
-    print(skserver)
     box = Box(private_key, pkserver)
 
     login_time = int(time.time())
@@ -115,6 +113,11 @@ async def verify_token_middleware(request: Request, call_next):
         return JSONResponse(
             status_code=200,
             content={},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*",
+            },
         )
 
     # List of paths that don't require authentication
