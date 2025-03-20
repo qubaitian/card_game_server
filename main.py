@@ -25,7 +25,7 @@ if not server_key:
     private_key = "2ff44da770473f99a51f9413cadc0b369088422f15529566782d7dba00b523ce"
 else:
     private_key = server_key.private_key
-skserver = PrivateKey(bytes.fromhex(server_key.private_key))
+skserver = PrivateKey(bytes.fromhex(private_key))
 pkserver = skserver.public_key
 
 app = FastAPI()
